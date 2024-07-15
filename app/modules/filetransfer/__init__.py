@@ -579,6 +579,17 @@ class FileTransferModule(_ModuleBase):
                                                     path=in_path,
                                                     target_path=new_file,
                                                     fail_list=[str(in_path)])
+                        case 'larger':
+                            # 存在时大覆盖小
+                            if target_file.stat().st_size < in_path.stat().st_size:
+                                logger.info(f"目标文件大小更小，将覆盖：{new_file}")
+                                overflag = True
+                            else:
+                                return TransferInfo(success=False,
+                                                    message=f"媒体库中已存在更高质量文件",
+                                                    path=in_path,
+                                                    target_path=new_file,
+                                                    fail_list=[str(in_path)])
                         case 'never':
                             # 存在不覆盖
                             return TransferInfo(success=False,
