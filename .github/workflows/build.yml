@@ -87,8 +87,8 @@ jobs:
           Remove-Item -Path "nginx.zip"
           Remove-Item -Path "nginx-1.25.2" -Recurse -Force
           # 下载前端
-          $FRONTEND_VERSION = (Invoke-WebRequest -Uri "https://api.github.com/repos/jxxghp/MoviePilot-Frontend/releases/latest" | ConvertFrom-Json).tag_name
-          Invoke-WebRequest -Uri "https://github.com/jxxghp/MoviePilot-Frontend/releases/download/$FRONTEND_VERSION/dist.zip" -OutFile "dist.zip"
+          $FRONTEND_VERSION = (Invoke-WebRequest -Uri "https://api.github.com/repos/MMZOX/MoviePilot-Frontend/releases/latest" | ConvertFrom-Json).tag_name
+          Invoke-WebRequest -Uri "https://github.com/MMZOX/MoviePilot-Frontend/releases/download/$FRONTEND_VERSION/dist.zip" -OutFile "dist.zip"
           Expand-Archive -Path "dist.zip" -DestinationPath "dist"
           Move-Item -Path "dist/dist/*" -Destination "nginx/html" -Force
           Remove-Item -Path "dist.zip"
