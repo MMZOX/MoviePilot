@@ -569,13 +569,13 @@ class FileTransferModule(_ModuleBase):
                             # 总是覆盖同名文件
                             overflag = True
                         case 'size':
-                            # 存在时大覆盖小
-                            if target_file.stat().st_size < in_path.stat().st_size:
-                                logger.info(f"目标文件文件大小更小，将覆盖：{new_file}")
+                            # 存在时大小不一则覆盖
+                            if target_file.stat().st_size != in_path.stat().st_size:
+                                logger.info(f"目标文件大小不一致，将覆盖：{new_file}")
                                 overflag = True
                             else:
                                 return TransferInfo(success=False,
-                                                    message=f"媒体库中已存在，且质量更好",
+                                                    message=f"媒体库中已存在相同文件",
                                                     path=in_path,
                                                     target_path=new_file,
                                                     fail_list=[str(in_path)])
